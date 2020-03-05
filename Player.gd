@@ -1,23 +1,37 @@
 extends KinematicBody2D
 
-var velocity = Vector2()
+const SPEED = 60
+const GRAVITY = 10
+const JUMP_FORCE = -250
 
-func _physics_process(delta):
-#	X axis movement
+const FLOOR = Vector2(0,-1)
+
+var velocity = Vector2()
+var is_on_ground =false
+
+func _physics_process(delta):	
+#	X axis movement (MOVE)
 	if Input.is_action_pressed("ui_right"):
-		velocity.x = 30
+		velocity.x = SPEED
 	elif Input.is_action_pressed("ui_left"):
-		velocity.x=-30
+		velocity.x=-SPEED
 	else:
 		velocity.x=0
 		
 		
-#	Y axis movement
-	if Input.is_action_pressed("ui_up"):
-		velocity.y = -30
-	elif Input.is_action_pressed("ui_down"):
-		velocity.y=30
+#	Y axis movement (JUMP)
+	if Input.is_action_pressed("ui_up") and is_on_ground:
+		velocity.y = JUMP_FORCE
+	
+#	Grvity increasing per frame
+	velocity.y += GRAVITY
+	
+	if is_on_floor():
+		is_on_ground=true
 	else:
-		velocity.y=0
-			
-	move_and_slide(velocity)
+		is_on_ground=false
+	
+#	By setting velocity to return value of move and slide...
+#	it retains it's position after a jump or falling down
+#	Floor is the top of the tile
+	velocity = move_and_slide(velocity,FLOOR)
