@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://sprites/characters/characters_36.png" type="Texture" id=1]
 [ext_resource path="res://Player.gd" type="Script" id=2]
@@ -8,12 +8,15 @@
 [ext_resource path="res://sprites/characters/characters_37.png" type="Texture" id=6]
 [ext_resource path="res://sprites/characters/characters_28.png" type="Texture" id=7]
 [ext_resource path="res://sprites/characters/characters_29.png" type="Texture" id=8]
+[ext_resource path="res://sprites/characters/characters_33.png" type="Texture" id=9]
+[ext_resource path="res://sprites/characters/characters_32.png" type="Texture" id=10]
+[ext_resource path="res://sprites/characters/characters_34.png" type="Texture" id=11]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 1 ), ExtResource( 6 ), ExtResource( 4 ), ExtResource( 5 ) ],
-"loop": true,
-"name": "Run",
+"frames": [ ExtResource( 10 ), ExtResource( 9 ), ExtResource( 11 ), ExtResource( 1 ) ],
+"loop": false,
+"name": "Attack",
 "speed": 10.0
 }, {
 "frames": [ ExtResource( 8 ) ],
@@ -30,6 +33,11 @@ animations = [ {
 "loop": false,
 "name": "Idle",
 "speed": 0.0
+}, {
+"frames": [ ExtResource( 1 ), ExtResource( 6 ), ExtResource( 4 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "Run",
+"speed": 10.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=2]
@@ -40,7 +48,8 @@ script = ExtResource( 2 )
 
 [node name="Player_Anim" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
-animation = "Idle"
+animation = "Attack"
+frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0.225929, 5.00209 )
@@ -48,3 +57,4 @@ shape = SubResource( 2 )
 
 [node name="ShootPos" type="Position2D" parent="."]
 position = Vector2( 12, 7.5 )
+[connection signal="animation_finished" from="Player_Anim" to="." method="_on_Player_Anim_animation_finished"]
