@@ -45,3 +45,6 @@ animation = "Idle"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0.225929, 5.00209 )
 shape = SubResource( 2 )
+
+[node name="ShootPos" type="Position2D" parent="."]
+position = Vector2( 12, 7.5 )
