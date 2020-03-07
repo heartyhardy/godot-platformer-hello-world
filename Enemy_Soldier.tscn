@@ -1,0 +1,48 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://sprites/characters/characters_48.png" type="Texture" id=1]
+[ext_resource path="res://sprites/characters/characters_46.png" type="Texture" id=2]
+[ext_resource path="res://sprites/characters/characters_47.png" type="Texture" id=3]
+[ext_resource path="res://sprites/characters/characters_49.png" type="Texture" id=4]
+[ext_resource path="res://Enemy_Soldier.gd" type="Script" id=5]
+[ext_resource path="res://sprites/characters/dead.png" type="Texture" id=6]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 1 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "Walk",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 6 ) ],
+"loop": false,
+"name": "Dead",
+"speed": 0.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 6.97037, 10.2116 )
+
+[node name="Soldier" type="KinematicBody2D"]
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Soldier_Ani" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+animation = "Dead"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 4.37126 )
+shape = SubResource( 2 )
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2( 7.36102, 0 )
+enabled = true
+cast_to = Vector2( 0, 16 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
