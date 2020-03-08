@@ -37,6 +37,11 @@ func _physics_process(_delta):
 		direction *= -1
 		$RayCast2D.position.x *= -1
 		
+	if get_slide_count() > 0:
+		for i in (get_slide_count()):
+			if "Player" in get_slide_collision(i).collider.name:
+				get_slide_collision(i).collider.die()
+		
 func die():
 	is_alive=false
 	$CollisionShape2D.set_deferred("disabled", true)

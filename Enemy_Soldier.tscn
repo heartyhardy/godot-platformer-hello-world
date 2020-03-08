@@ -9,15 +9,15 @@
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 1 ), ExtResource( 4 ) ],
-"loop": true,
-"name": "Walk",
-"speed": 10.0
-}, {
 "frames": [ ExtResource( 6 ) ],
 "loop": false,
 "name": "Dead",
 "speed": 0.0
+}, {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 1 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "Walk",
+"speed": 10.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=2]
