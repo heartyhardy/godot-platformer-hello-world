@@ -20,20 +20,15 @@ animations = [ {
 "name": "Dead",
 "speed": 0.0
 }, {
-"frames": [ ExtResource( 10 ), ExtResource( 9 ), ExtResource( 11 ), ExtResource( 1 ) ],
-"loop": false,
-"name": "Attack",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 8 ) ],
-"loop": false,
-"name": "Fall",
-"speed": 0.0
-}, {
 "frames": [ ExtResource( 7 ) ],
 "loop": false,
 "name": "Jump",
 "speed": 0.0
+}, {
+"frames": [ ExtResource( 10 ), ExtResource( 9 ), ExtResource( 11 ), ExtResource( 1 ) ],
+"loop": false,
+"name": "Attack",
+"speed": 10.0
 }, {
 "frames": [ ExtResource( 3 ) ],
 "loop": false,
@@ -44,6 +39,11 @@ animations = [ {
 "loop": true,
 "name": "Run",
 "speed": 10.0
+}, {
+"frames": [ ExtResource( 8 ) ],
+"loop": false,
+"name": "Fall",
+"speed": 0.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=2]
@@ -68,12 +68,13 @@ position = Vector2( 12, 7.5 )
 current = true
 limit_left = 0
 limit_top = -180
-limit_right = 640
+limit_right = 960
 limit_bottom = 180
 smoothing_enabled = true
 smoothing_speed = 4.0
 
 [node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
 one_shot = true
 [connection signal="animation_finished" from="Player_Anim" to="." method="_on_Player_Anim_animation_finished"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

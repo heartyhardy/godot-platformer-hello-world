@@ -1,8 +1,12 @@
 extends KinematicBody2D
 
-const SPEED = 30
 const GRAVITY = 10
 const FLOOR = Vector2(0, -1)
+
+export(int) var speed = 30
+export(int) var hp = 1
+export(Vector2) var size = Vector2(1,1)
+export(Color) var color = Color(1,1,1)
 
 var velocity = Vector2()
 var direction = 1
@@ -10,11 +14,13 @@ var is_alive = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	scale = size
+	modulate = color
+	pass
 
 func _physics_process(_delta):
 	if is_alive:
-		velocity.x = SPEED * direction
+		velocity.x = speed * direction
 		
 		if direction == -1:
 			$Soldier_Ani.flip_h=true
@@ -43,11 +49,15 @@ func _physics_process(_delta):
 				get_slide_collision(i).collider.die()
 		
 func die():
-	is_alive=false
-	$CollisionShape2D.set_deferred("disabled", true)
-	velocity = Vector2(0,0)
-	$Soldier_Ani.play("Dead")
-	$Timer.start()
+	hp -= 1
+	if hp <= 0:
+		is_alive=false
+		$CollisionShape2D.set_deferred("disabled", true)
+		velocity = Vector2(0,0)
+		$Soldier_Ani.play("Dead")
+		$Timer.start()
+		if size > Vector2(1,1):
+			get_parent().get_node("ScreenShake").screen_shake(1,10,100)
 
 
 func _on_Timer_timeout():

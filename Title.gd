@@ -4,7 +4,7 @@ extends Node
 func _ready():
 	$MarginContainer/VBoxContainer/VBoxContainer/StartButton.grab_focus()
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if $MarginContainer/VBoxContainer/VBoxContainer/StartButton.is_hovered():
 		$MarginContainer/VBoxContainer/VBoxContainer/StartButton.grab_focus()
 	if $MarginContainer/VBoxContainer/VBoxContainer/ExitButton.is_hovered():
