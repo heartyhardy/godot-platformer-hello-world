@@ -48,8 +48,8 @@ func _physics_process(_delta):
 			if "Player" in get_slide_collision(i).collider.name:
 				get_slide_collision(i).collider.die()
 		
-func die():
-	hp -= 1
+func die(damage):
+	hp -= damage
 	if hp <= 0:
 		is_alive=false
 		$CollisionShape2D.set_deferred("disabled", true)

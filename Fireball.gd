@@ -32,5 +32,5 @@ func _on_VisibilityNotifier2D_screen_exited():
 #Fire this even when Fireball collision body collides with another
 func _on_Fireball_body_entered(body):
 	if "Soldier" in body.name:
-		body.die()
+		body.die(1)
 	queue_free()

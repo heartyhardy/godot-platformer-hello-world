@@ -1,12 +1,15 @@
 extends KinematicBody2D
 
 const FIREBALL = preload("res://Fireball.tscn")
+const FIREBALL_EMP = preload("res://Fireball_Emp.tscn")
 
 const SPEED = 60
 const GRAVITY = 10
 const JUMP_FORCE = -250
 
 const FLOOR = Vector2(0,-1)
+
+var fireball_power = 1
 
 var velocity = Vector2()
 var is_on_ground =false
@@ -49,7 +52,11 @@ func _physics_process(_delta):
 				velocity.x=0
 			is_attacking=true
 			$Player_Anim.play("Attack")
-			var fireball = FIREBALL.instance()
+			var fireball
+			if fireball_power == 1:
+				fireball = FIREBALL.instance()
+			elif fireball_power == 2:
+				fireball = FIREBALL_EMP.instance()
 			if sign($ShootPos.position.x) == 1:
 				fireball.set_fireball_direction(1)
 			else:
@@ -94,3 +101,6 @@ func _on_Player_Anim_animation_finished():
 
 func _on_Timer_timeout():
 	get_tree().change_scene("res://Title.tscn")
+
+func crown_power_up():
+	fireball_power = 2
